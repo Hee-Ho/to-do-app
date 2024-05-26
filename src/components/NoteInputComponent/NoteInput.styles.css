@@ -1,0 +1,46 @@
+.input-note {
+  background-color: rgb(44, 148, 207);
+  margin-bottom: 1em; /*Margin is add space around the element*/
+  border-radius: 1rem; /*Border radius is to rounds the corner of the element border edge*/ 
+  padding: 1rem;      /* padding is to add space around the content in the element*/
+  /*width: 60vw;        /* witdh with vw (viewport width) is  a unit of measurement to define the size of the element relative to the size of the viewport*/
+  min-height: 150px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute items evenly. The first item is flush with the start, the last is flush with the end */
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+}
+
+textarea {
+  border: none;
+  resize: none;
+  background-color: rgb(44, 148, 207);
+}
+
+/*Styling for when the input note is on focus*/
+textarea:focus { 
+  outline: none;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.save {
+  background-color: grey;
+  border: none;
+  border-radius: 1rem;
+  padding: 5px 10px 5px 10px;
+}
+
+.save:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}

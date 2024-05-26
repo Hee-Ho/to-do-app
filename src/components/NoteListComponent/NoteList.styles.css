@@ -1,0 +1,5 @@
+.notes-list {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 250px)); /* set the number of element for each rows and the minmax size of the elements*/
+}
