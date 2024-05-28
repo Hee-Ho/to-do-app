@@ -1,4 +1,5 @@
 import Note from "../NoteComponent/Note.component.jsx";
+import CreateNoteModal from "../Modal/CreateNoteModel.component.jsx";
 import { useQuery } from "@tanstack/react-query"; //react-query
 import InputNote from "../NoteInputComponent/NoteInput.component.jsx";
 import { nanoid } from 'nanoid'
@@ -94,7 +95,9 @@ const NoteList = () => {
     return (
       <div className="container">
         <SearchBar setSearch={setSearchInput}> </SearchBar>
-        <InputNote handleAddNote={handleAddNote}> </InputNote>
+        <div className="modal-button"> 
+          <CreateNoteModal handleAddNote={handleAddNote}> </CreateNoteModal>
+        </div>
         <DndContext 
           onDragEnd={handleDragEnd} 
           collisionDetection={closestCorners}
