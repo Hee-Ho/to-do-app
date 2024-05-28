@@ -1,11 +1,10 @@
 .input-note {
   background-color: rgb(44, 148, 207);
-  margin-bottom: 1em; /*Margin is add space around the element*/
   border-radius: 1rem; /*Border radius is to rounds the corner of the element border edge*/ 
   padding: 1rem;      /* padding is to add space around the content in the element*/
   /*width: 60vw;        /* witdh with vw (viewport width) is  a unit of measurement to define the size of the element relative to the size of the viewport*/
-  min-height: 150px;
-  width: 220px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Distribute items evenly. The first item is flush with the start, the last is flush with the end */
