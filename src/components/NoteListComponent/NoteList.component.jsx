@@ -6,7 +6,7 @@ import { saveNotes, getNotes } from "../../storage-actions/storage-access.js";
 import { useState, useEffect } from 'react';
 import "./NoteList.styles.css"
 import SearchBar from "../SearchBarComponent/SearchBar.component.jsx";
-import { DndContext, closestCorners, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { DndContext, closestCorners, MouseSensor, TouchSensor, useSensor, useSensors, PointerSensor } from "@dnd-kit/core";
 import { SortableContext, arrayMove, horizontalListSortingStrategy } from "@dnd-kit/sortable"
 
 const NoteList = () => {
@@ -16,14 +16,15 @@ const NoteList = () => {
   const [searchInput, setSearchInput] = useState('');
 
   //for component to differenciate clicking and dragging
-  const [isDragging, setIsDragging] = useState(false); 
   const sensors = useSensors(
-    useSensor(MouseSensor), 
-    useSensor(TouchSensor, {activationConstraint: {
-      delay: 100
-    },
-  })
-  )
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 0.01
+      }
+    }),
+    useSensor(MouseSensor),
+    useSensor(TouchSensor),
+    )
 
   const { isError, isSuccess, isLoading, data } = useQuery({
     queryKey: ["notes"],
@@ -63,13 +64,8 @@ const NoteList = () => {
     setNotes(newNotes);
   }
 
-  //Handle drop drag of a note component 
-  const handleDragStart = (event) => {
-    setIsDragging(true)
-  }
 
   const handleDragEnd = (event) => {
-    setIsDragging(false)
     const {active, over} = event
     if (active.id === over.id) { //if the position of the drag item remain the same 
       return
@@ -100,15 +96,14 @@ const NoteList = () => {
         <SearchBar setSearch={setSearchInput}> </SearchBar>
         <InputNote handleAddNote={handleAddNote}> </InputNote>
         <DndContext 
-          onDragStart={handleDragStart}
           onDragEnd={handleDragEnd} 
           collisionDetection={closestCorners}
           sensors={sensors}> 
-         
+        
           <div className="notes-list"> 
             <SortableContext items={filteredNotes} strategy={horizontalListSortingStrategy}> 
               {filteredNotes.map(note => (
-                <Note key={note.id} note = {note} handleDeleteNote={handleDeleteNote} dragging={isDragging}/>
+                <Note key={note.id} note = {note} handleDeleteNote={handleDeleteNote}/>
               ))}
             </SortableContext>
           </div>

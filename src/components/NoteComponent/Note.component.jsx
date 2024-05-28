@@ -1,11 +1,11 @@
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 import "./Note.styles.css"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const Note = ({note, handleDeleteNote, dragging}) => {
+const Note = ({note, handleDeleteNote}) => {
   let {id, text, date} = note;
-  const {attribute, listeners, isDragging, setNodeRef, transform, transition} = useSortable({id})
+  const {attribute, listeners, setNodeRef, transform, transition} = useSortable({id})
 
   //Style for dragging
   const style = {
@@ -18,9 +18,7 @@ const Note = ({note, handleDeleteNote, dragging}) => {
       <span> {text} </span>
       <div className="footer"> 
         <small> {date} </small>
-        <MdDeleteForever className="delete-icon" size='1.3em' onClick={() => {
-          handleDeleteNote(id)
-        }}/>
+        <MdDeleteForever className="delete-icon" size='1.3em' onClick={() => {handleDeleteNote(id)}}/>
       </div>
     </div>
   );
