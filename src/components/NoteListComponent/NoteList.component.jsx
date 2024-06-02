@@ -73,11 +73,22 @@ const NoteList = () => {
     }
 
     setNotes( notes => {
-      const originalPos = getNotePos(active.id)
-      const newPos = getNotePos(over.id)
-      return arrayMove(notes, originalPos, newPos)
+      const originalPos = getNotePos(active.id);
+      const newPos = getNotePos(over.id);
+      return arrayMove(notes, originalPos, newPos);
     })
+  }
 
+  const handleEdit = (note) => {
+    const original_note = getNotePos(note.id);
+    const update_note = {
+      id: note.id,
+      text: "changed",
+      date: note.date
+    }
+    notes[original_note] = update_note
+    console.log(notes)
+    setNotes(notes);
   }
 
   //Helper method to find the task id for handleDragEnd
@@ -106,7 +117,7 @@ const NoteList = () => {
           <div className="notes-list"> 
             <SortableContext items={filteredNotes} strategy={horizontalListSortingStrategy}> 
               {filteredNotes.map(note => (
-                <Note key={note.id} note = {note} handleDeleteNote={handleDeleteNote}/>
+                <Note key={note.id} note = {note} handleDeleteNote={handleDeleteNote} handleEdit={handleEdit}/>
               ))}
             </SortableContext>
           </div>
