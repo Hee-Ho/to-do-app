@@ -45,7 +45,7 @@ const NoteList = () => {
     else {
       filtered = notes.filter(n => n.text.toLowerCase().includes(searchInput.toLowerCase()))
     }
-    setFilterNotes(filtered)
+    setFilterNotes(filtered || [])
   },[searchInput, notes])
 
 //----------------------------------------------------------------------------------------
@@ -102,6 +102,7 @@ const NoteList = () => {
       setFilterNotes(data);
       setMounted(true);
     }
+
     //Component must be wrap in DndContext to use the dnd-kit
     return (
       <div className="container">
